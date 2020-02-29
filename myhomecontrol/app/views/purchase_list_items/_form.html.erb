@@ -1,0 +1,25 @@
+<%= form_with(model:[@purchase_list, @purchase_list_item ], local: true)  do |form| %>
+  <p>
+    <%= form.label :product %><br>
+    <%= collection_select :purchase_list_item, :product_id, Product.all, :id, :to_s, {:include_blank => true } %>
+  </p>
+  <p>
+    <%= form.label :quantity %><br>
+    <%= form.text_field :quantity %>
+
+    <%= form.label(:unity, "Unity") %>
+    <%= form.radio_button(:unity, "und") %>
+    <%= form.label(:unity, "Package") %>
+    <%= form.radio_button(:unity, "pck") %>
+    <%= form.label(:unity, "Kilograms") %>
+    <%= form.radio_button(:unity, "kg") %>
+  </p>
+  <p>
+    <%= form.label :price %><br>
+    <%= form.text_field :price %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

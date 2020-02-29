@@ -1,0 +1,13 @@
+
+<h1>
+  <%= @purchase_list.id %>-<%= @purchase_list.name %>
+</h1>
+
+<p>
+  <strong>Date:</strong><%= @purchase_list.purchase_date %><br>
+  <strong>Total Price:</strong><%= @purchase_list.total %><br>
+</p>
+<%= render 'purchase_list_items/list' %>
+
+<br><br>
+<%= render 'footer' %>

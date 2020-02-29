@@ -1,0 +1,26 @@
+<%= link_to 'Add Item', new_purchase_list_purchase_list_item_path(@purchase_list) %>
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Unity</th>
+    <th>Price</th>
+    <th>Total</th>
+    <th>Actions</th>
+  </tr>
+  <% @purchase_list.purchase_list_items.each do |item| %>
+    <tr>
+      <td> <%= item.product%></td>
+      <td> <%= item.quantity %> </td>
+      <td> <%= item.unity %> </td>
+      <td> <%= item.price %> </td>
+      <td> <%= item.total %> </td>
+      <td>
+        <%= link_to 'edit', edit_purchase_list_purchase_list_item_path(@purchase_list, item) %>
+        <%= link_to 'delete', purchase_list_purchase_list_item_path(@purchase_list, item),
+                                method: :delete,
+                                data: {confirm: "Are you sure?"}%>
+      </td>
+    </tr>
+  <% end %>
+</table>
