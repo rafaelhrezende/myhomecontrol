@@ -1,26 +1,26 @@
-<H1>Purchase Lists</H1>
-<%= link_to 'Create Purchase List', new_purchase_list_path %>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Date</th>
-    <th>Total</th>
-    <th>Actions</th>
-  </tr>
-  <% @purchase_lists.each do |purchase_list| %>
-  <tr>
-    <td><%= purchase_list.id %> </td>
-    <td><%= purchase_list.name %> </td>
-    <td><%= purchase_list.purchase_date %> </td>
-    <td><%= purchase_list.total %> </td>
-    <td>
-      <%= link_to 'view', purchase_list_path(purchase_list) %> |
-      <%= link_to 'edit', edit_purchase_list_path(purchase_list) %> |
+<H1 class="text-center">Lists</H1>
+<%= link_to 'New List', new_purchase_list_path,:class => "btn btn-success" %>
+<% @purchase_lists.each do |purchase_list| %>
+  <div class="card border-dark">
+    <div class="card-body">
+      <h5 class="card-title"><%= purchase_list.to_s %></h5>
+      <p class="card-text">
+        <strong>DT: </strong><%= purchase_list.purchase_date %>
+        <strong>$ </strong><%= purchase_list.total %>
+        <strong>Items: </strong><%= purchase_list.quantity %>
+      </p>
+      <% if purchase_list.company %>
+      <p class="card-text" >
+        <%= purchase_list.company %>
+      </p>
+      <% end %>
+    </div>
+    <div class="card-footer text-center">
+      <%= link_to 'view', purchase_list_path(purchase_list), :class => 'btn btn-primary' %>
+      <%= link_to 'edit', edit_purchase_list_path(purchase_list), :class => 'btn btn-primary' %>
       <%= link_to 'delete', purchase_list_path(purchase_list),
                             method: :delete,
-                            data: {confirm: 'Are you sure?'}%>
-  </td>
-  </tr>
+                            data: {confirm: 'Are you sure?'}, :class => 'btn btn-danger'%>
+    </div>
+  </div><br>
   <% end %>
-</table>

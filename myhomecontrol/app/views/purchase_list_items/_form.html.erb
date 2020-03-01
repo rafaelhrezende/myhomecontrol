@@ -1,25 +1,26 @@
 <%= form_with(model:[@purchase_list, @purchase_list_item ], local: true)  do |form| %>
-  <p>
+  <div class="form-group">
     <%= form.label :product %><br>
-    <%= collection_select :purchase_list_item, :product_id, Product.all, :id, :to_s, {:include_blank => true } %>
-  </p>
-  <p>
-    <%= form.label :quantity %><br>
-    <%= form.text_field :quantity %>
-
-    <%= form.label(:unity, "Unity") %>
+    <%= collection_select :purchase_list_item,
+                          :product_id, Product.all, :id, :to_s,
+                           {:include_blank => true, :class => "form-control" } %>
+  </div>
+  <div class="form-group">
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity, :class => "form-control" %>
+  </div>
+  <div class="form-group text-center">
     <%= form.radio_button(:unity, "und") %>
-    <%= form.label(:unity, "Package") %>
+    <%= form.label(:unity, "Unity") %>
     <%= form.radio_button(:unity, "pck") %>
-    <%= form.label(:unity, "Kilograms") %>
+    <%= form.label(:unity, "Package") %>
     <%= form.radio_button(:unity, "kg") %>
-  </p>
-  <p>
+    <%= form.label(:unity, "Kilograms") %>
+  </div>
+  <div class="form-group">
     <%= form.label :price %><br>
-    <%= form.text_field :price %>
-  </p>
+    <%= form.text_field :price, :class =>"form-control" %>
+  </div>
+  <%= form.submit :class => "btn btn-primary" %>
 
-  <p>
-    <%= form.submit %>
-  </p>
 <% end %>

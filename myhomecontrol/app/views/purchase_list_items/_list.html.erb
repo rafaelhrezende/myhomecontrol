@@ -1,26 +1,22 @@
-<%= link_to 'Add Item', new_purchase_list_purchase_list_item_path(@purchase_list) %>
-<table>
-  <tr>
-    <th>Product</th>
-    <th>Quantity</th>
-    <th>Unity</th>
-    <th>Price</th>
-    <th>Total</th>
-    <th>Actions</th>
-  </tr>
+<%= link_to 'Add Item', new_purchase_list_purchase_list_item_path(@purchase_list), :class => "btn btn-success" %>
+
   <% @purchase_list.purchase_list_items.each do |item| %>
-    <tr>
-      <td> <%= item.product%></td>
-      <td> <%= item.quantity %> </td>
-      <td> <%= item.unity %> </td>
-      <td> <%= item.price %> </td>
-      <td> <%= item.total %> </td>
-      <td>
-        <%= link_to 'edit', edit_purchase_list_purchase_list_item_path(@purchase_list, item) %>
+    <div class="card border-dark">
+      <div class="card-body">
+        <h5 class="card-title"> <%= item.product %> </h5>
+        <p class="card-text">
+          <strong>Quantity: </strong><%= item.quantity %>
+          <strong>Unity: </strong><%= item.unity %> </p>
+        <p class="card-text">
+          <strong>Price: </strong><%= item.price %>
+          <strong>Total: </strong><%= item.total %>
+        </p>
+      </div>
+      <div class="card-footer text-center">
+        <%= link_to 'edit', edit_purchase_list_purchase_list_item_path(@purchase_list, item), :class => "btn btn-primary" %>
         <%= link_to 'delete', purchase_list_purchase_list_item_path(@purchase_list, item),
                                 method: :delete,
-                                data: {confirm: "Are you sure?"}%>
-      </td>
-    </tr>
+                                data: {confirm: "Are you sure?"}, :class => "btn btn-danger"%>
+      </div>
+    </div><br>
   <% end %>
-</table>

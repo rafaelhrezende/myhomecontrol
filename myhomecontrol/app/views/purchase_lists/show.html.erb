@@ -1,13 +1,17 @@
+<div class="card border-dark">
+  <h1 class="text-center">
+    <%= @purchase_list.id %>-<%= @purchase_list.name %>
+  </h1>
 
-<h1>
-  <%= @purchase_list.id %>-<%= @purchase_list.name %>
-</h1>
+  <p class="card-text text-center">
+    <%= @purchase_list.purchase_date %> |
+    <strong>$</strong>
+    <%= @purchase_list.total %> |
+    <%= @purchase_list.quantity %>
+    <strong>Items</strong>
+  </p>
+</div>
 
-<p>
-  <strong>Date:</strong><%= @purchase_list.purchase_date %><br>
-  <strong>Total Price:</strong><%= @purchase_list.total %><br>
-</p>
 <%= render 'purchase_list_items/list' %>
 
-<br><br>
 <%= render 'footer' %>
