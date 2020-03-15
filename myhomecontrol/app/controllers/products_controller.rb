@@ -17,6 +17,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.context = current_user.get_current_context
+    
     save_result = @product.save
     if save_result
       redirect_to @product

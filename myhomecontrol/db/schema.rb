@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_15_161942) do
+ActiveRecord::Schema.define(version: 2020_03_15_180616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_03_15_161942) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "brand", limit: 50
+    t.bigint "context_id"
+    t.index ["context_id"], name: "index_products_on_context_id"
   end
 
   create_table "purchase_list_items", force: :cascade do |t|
@@ -52,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_03_15_161942) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "purchase_date"
+    t.bigint "context_id"
+    t.index ["context_id"], name: "index_purchase_lists_on_context_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,7 +73,9 @@ ActiveRecord::Schema.define(version: 2020_03_15_161942) do
   end
 
   add_foreign_key "contexts", "users"
+  add_foreign_key "products", "contexts"
   add_foreign_key "purchase_list_items", "products"
   add_foreign_key "purchase_list_items", "purchase_lists"
+  add_foreign_key "purchase_lists", "contexts"
   add_foreign_key "users", "contexts"
 end

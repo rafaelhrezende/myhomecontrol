@@ -17,6 +17,8 @@ class PurchaseListsController < ApplicationController
 
   def create
     @purchase_list = PurchaseList.new(purchase_list_params)
+    @purchase_list.context = current_user.get_current_context
+    
     save_result = @purchase_list.save
     if save_result
       redirect_to @purchase_list

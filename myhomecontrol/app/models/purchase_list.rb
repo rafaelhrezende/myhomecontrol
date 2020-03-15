@@ -3,6 +3,7 @@ class PurchaseList < ApplicationRecord
                    length: {minimum: 5}
 
   has_many :purchase_list_items
+  belongs_to :context
 
   def total
     totalprice = 0
