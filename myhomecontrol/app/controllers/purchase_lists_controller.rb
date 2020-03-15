@@ -2,10 +2,11 @@ class PurchaseListsController < ApplicationController
   before_action :set_purchase_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @purchase_lists = PurchaseList.all
+    @purchase_lists = current_user.get_current_context.purchase_lists
   end
 
   def show
+    authorize! :show, @purchase_list
   end
 
   def new
@@ -18,7 +19,7 @@ class PurchaseListsController < ApplicationController
   def create
     @purchase_list = PurchaseList.new(purchase_list_params)
     @purchase_list.context = current_user.get_current_context
-    
+
     save_result = @purchase_list.save
     if save_result
       redirect_to @purchase_list

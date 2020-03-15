@@ -1,11 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+
   def index
-    @products = Product.all
+    @products = current_user.get_current_context.products
   end
 
   def show
-
+      authorize! :show, @product
   end
 
   def new
@@ -18,7 +19,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.context = current_user.get_current_context
-    
+
     save_result = @product.save
     if save_result
       redirect_to @product

@@ -2,7 +2,7 @@
   <div class="form-group">
     <%= form.label :product %><br>
     <%= collection_select :purchase_list_item,
-                          :product_id, Product.all, :id, :to_s,
+                          :product_id, current_user.get_current_context.products, :id, :to_s,
                            {:include_blank => true, :class => "form-control" } %>
   </div>
   <div class="form-group">
