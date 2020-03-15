@@ -22,14 +22,22 @@
         </div>
         <div class="text-right col-6">
           <% if user_signed_in? %>
-            <strong><%= current_user.email %></strong>.
             <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+            <%= link_to 'contexts', context_index_path, :class => 'navbar-link' %> |
             <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
           <% else %>
             <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
             <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
           <% end %>
         </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <% if user_signed_in? %>
+            <%= current_user.get_current_context.description %>
+          <% end %>
+        </div>
+
       </div>
     </div>
     <div id="app" class="p-1">

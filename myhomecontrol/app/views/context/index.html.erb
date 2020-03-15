@@ -1,0 +1,13 @@
+<h1 class="text-center">Contexts</h1>
+
+<% @contexts.each do |context| %>
+  <div class="card text-white bg-primary">
+    <div class="card-body">
+      <h5 class="card-title">
+        <strong>ID: </strong> <%= context.id %>
+        <strong>Context: </strong><%= context.description %>
+      </h5>
+    </div>
+  </div>
+
+<% end %>
