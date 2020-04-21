@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :contexts
-  belongs_to :context
+  belongs_to :context, optional: true
 
   def get_current_context
 
