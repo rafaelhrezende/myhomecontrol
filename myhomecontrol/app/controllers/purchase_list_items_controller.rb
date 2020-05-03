@@ -4,6 +4,12 @@ class PurchaseListItemsController < ApplicationController
 
   def new
     @purchase_list_item = @purchase_list.purchase_list_items.build
+
+    if params[:term] && params[:term] != ''
+      @products = Product.search params[:term]
+    else
+      @products = current_user.get_current_context.products
+    end
   end
 
   def edit

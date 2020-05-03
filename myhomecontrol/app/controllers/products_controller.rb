@@ -2,7 +2,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = current_user.get_current_context.products
+    if params[:term] && params[:term] != ''
+      @products = Product.search params[:term]
+    else
+      @products = current_user.get_current_context.products
+    end
   end
 
   def show

@@ -1,0 +1,29 @@
+
+<% unless @products.nil? %>
+  <% @products.each do |product| %>
+      <div class="card border-dark">
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong>ID: </strong> <%= product.id %> - <%= product.name %></h5>
+
+          <p class="card-text"><strong>Category: </strong> <%= product.category %></p>
+          <p class="card-text"><strong>Brand: </strong> <%= product.brand %></p>
+        </div>
+        <% if @purchase_list.nil? %>
+        <div class="card-footer text-center">
+          <%= link_to 'view', product_path(product), :class => 'btn btn-primary' %>
+          <%= link_to 'edit', edit_product_path(product), :class => 'btn btn-primary' %>
+          <%= link_to 'delete', product_path(product),
+                                method: :delete,
+                                data: {confirm: "Are you sure?"}, :class => 'btn btn-danger' %>
+        </div>
+        <% else %>
+        <% @internal_purchase_list_item  = @purchase_list_item%>
+        <% @internal_product = product %>
+
+        <%= render 'purchase_list_items/form' %>
+        <% end %>
+      </div><br>
+
+  <% end %>
+<% end %>

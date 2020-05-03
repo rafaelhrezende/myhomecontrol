@@ -1,6 +1,7 @@
 class PurchaseList < ApplicationRecord
   validates :name, presence: true,
                    length: {minimum: 5}
+  default_scope { order('name') }
 
   has_many :purchase_list_items
   belongs_to :context

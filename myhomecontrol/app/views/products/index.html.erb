@@ -1,22 +1,11 @@
 <h1 class="text-center">Products</h1>
 <%= link_to 'new product', new_product_path, :class => "btn btn-success" %>
 
-<% @products.each do |product| %>
-    <div class="card border-dark">
-      <div class="card-body">
-        <h5 class="card-title">
-          <strong>ID: </strong> <%= product.id %> - <%= product.name %></h5>
-
-        <p class="card-text"><strong>Category: </strong> <%= product.category %></p>
-        <p class="card-text"><strong>Brand: </strong> <%= product.brand %></p>
-      </div>
-      <div class="card-footer text-center">
-        <%= link_to 'view', product_path(product), :class => 'btn btn-primary' %>
-        <%= link_to 'edit', edit_product_path(product), :class => 'btn btn-primary' %>
-        <%= link_to 'delete', product_path(product),
-                              method: :delete,
-                              data: {confirm: "Are you sure?"}, :class => 'btn btn-danger' %>
-      </div>
-    </div><br>
-
+<div class="form-group text-center">
+<%= form_tag products_path, method: :get do %>
+  <%= text_field_tag 'term', params[:term], placeholder: "Enter user's name or surname", :class => "col-8" %>
+  <%= submit_tag 'Search!', :class => "btn btn-primary col-3" %>
 <% end %>
+</div>
+
+<%= render 'list' %>

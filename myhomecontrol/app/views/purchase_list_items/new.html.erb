@@ -3,4 +3,11 @@
   <strong>Lista:</strong> <%= @purchase_list.name %>
   <strong>Item:</strong> New
 </p>
-<%= render 'form' %>
+<div class="form-group text-center">
+<%= form_tag new_purchase_list_purchase_list_item_path(@purchase_list), method: :get do %>
+  <%= text_field_tag 'term', params[:term], placeholder: "Search by name, category or brand", :class => "col-8" %>
+  <%= submit_tag 'Search!', :class => "btn btn-primary col-3" %>
+<% end %>
+</div>
+
+<%= render 'products/list' %>

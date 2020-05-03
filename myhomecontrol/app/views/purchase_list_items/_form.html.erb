@@ -1,26 +1,29 @@
-<%= form_with(model:[@purchase_list, @purchase_list_item ], local: true)  do |form| %>
-  <div class="form-group">
-    <%= form.label :product %><br>
-    <%= collection_select :purchase_list_item,
-                          :product_id, current_user.get_current_context.products, :id, :to_s,
-                           {:include_blank => true, :class => "form-control" } %>
-  </div>
-  <div class="form-group">
+<%= form_with(model:[@purchase_list, @internal_purchase_list_item ], local: true)  do |form| %>
+<% if @internal_purchase_list_item.id.nil? %>
+  <%= form.hidden_field :product_id, :value => @internal_product.id %>
+<% end %>
+<div class="row">
+  <div class="form-group col-6">
     <%= form.label :quantity %>
     <%= form.text_field :quantity, :class => "form-control" %>
   </div>
-  <div class="form-group text-center">
-    <%= form.radio_button(:unity, "und") %>
-    <%= form.label(:unity, "Unity") %>
-    <%= form.radio_button(:unity, "pck") %>
-    <%= form.label(:unity, "Package") %>
-    <%= form.radio_button(:unity, "kg") %>
-    <%= form.label(:unity, "Kilograms") %>
-  </div>
-  <div class="form-group">
+  <div class="form-group col-6">
     <%= form.label :price %><br>
     <%= form.text_field :price, :class =>"form-control" %>
   </div>
-  <%= form.submit :class => "btn btn-primary" %>
-
+</div>
+<div class="form-group text-center">
+  <%= form.radio_button(:unity, "und") %>
+  <%= form.label(:unity, "Unity") %>
+  <%= form.radio_button(:unity, "pck") %>
+  <%= form.label(:unity, "Package") %>
+  <%= form.radio_button(:unity, "kg") %>
+  <%= form.label(:unity, "Kilograms") %>
+</div>
+<%= form.submit :class => "btn btn-primary" %>
+<% unless @internal_purchase_list_item.id.nil? %>
+  <%= link_to 'delete', purchase_list_purchase_list_item_path(@purchase_list, @internal_purchase_list_item),
+                          method: :delete,
+                          data: {confirm: "Are you sure?"}, :class => "btn btn-danger"%>
+<% end %>
 <% end %>
